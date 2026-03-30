@@ -1,0 +1,16 @@
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+
+# Environment files
+.env
+
+# IDE folders
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
