@@ -73,8 +73,9 @@ def choose_drink():
     size_name, upcharge = SIZES[size_choice - 1]
     price = base_price + upcharge
 
-    print(f"Added: {MenuItem}\n")
-    return MenuItem(name, size_name, price)
+    item = MenuItem(name, size_name, price)
+    print(f"Added: {item}\n")
+    return item
 
 def welcome_banner():
     # Prints a decorative welcome banner
@@ -123,20 +124,23 @@ def main():
         # Remove a drink
         elif choice == 2:
             if not order.items:
-                print("Your order is empty!")
+                print("Current order is empty!")
                 continue
             print("\nCurrent order:")
             for i, item in enumerate(order.items, 1):
                 print(f"{i}. {item}")
             try:
-                idx = int(input("\nEnter item number to remove: "))
-                order.remove_item(idx)
+                index = int(input("\nEnter item number to remove: "))
+                order.remove_item(index)
             except (ValueError, IndexError):
                 print("Invalid item number.")
 
         # View current order
         elif choice == 3:
-            print(order)
+            print("\nCurrent order:")
+            for i, item in enumerate(order.items, 1):
+                print(f"{i}. {item}")
+            print()
 
         # Complete order and check out
         elif choice == 4:

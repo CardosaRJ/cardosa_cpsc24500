@@ -17,9 +17,10 @@ class MenuItem:
 
     def __init__(self, name, size, price):
         # TODO: store name, size, and price as instance attributes
-        pass
+        self.name = name
+        self.size = size
+        self.price = price
 
     def __str__(self):
         # TODO: return a string in the format "Latte (Large) - $6.00"
-        # Hint: f"{self.name} ({self.size}) - ${self.price:.2f}"
-        pass
+        return f"{self.name} ({self.size}) - ${self.price:.2f}"
