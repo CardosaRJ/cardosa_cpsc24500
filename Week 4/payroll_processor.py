@@ -19,12 +19,12 @@ class PayrollProcessor:
 
     def __init__(self):
         # TODO: initialize self._employees as an empty list
-        pass
+        self._employees = []
 
     @property
     def employees(self):
         # TODO: return a COPY of the list, not the original
-        pass
+        return list(self._employees)
 
     def load_from_file(self, filename):
         # TODO: open the file in a try/except for FileNotFoundError
@@ -33,24 +33,47 @@ class PayrollProcessor:
         #   - split on tab; if not exactly 4 fields, print a warning and continue
         #   - try to create an Employee; catch ValueError and print a warning
         #   - append to self._employees on success
-        pass
+        try:
+            with open(filename, "r") as f:
+                for line_num, line in enumerate(f, 1):
+                    line = line.strip()
+                    if not line:
+                        continue
+                    fields = line.split("\t")
+                    if len(fields) != 4:
+                        print(f"Warning: Line {line_num} has the wrong number of fields")
+                        continue
+                    try:
+                        emp = Employee(fields[0], fields[1], fields[2], fields[3])
+                        self._employees.append(emp)
+                    except ValueError as e:
+                        print(f"Error, {line_num} - {e}")
+        except FileNotFoundError:
+            print(f"Error: {filename} not found.")
 
     def calculate_total_payroll(self):
         # TODO: return the sum of gross pay across all employees
-        pass
+        return sum(emp.calculate_gross_pay() for emp in self._employees)
 
     def find_highest_paid(self):
         # TODO: return the Employee with the highest gross pay (or None if empty)
-        pass
+        if not self._employees:
+            return None
+        return max(self._employees, key=lambda e: e.calculate_gross_pay())
 
     def find_lowest_paid(self):
         # TODO: return the Employee with the lowest gross pay (or None if empty)
-        pass
+        if not self._employees:
+            return None
+        return min(self._employees, key=lambda e: e.calculate_gross_pay())        
 
     def get_employee_count(self):
         # TODO
-        pass
+        return len(self._employees)
 
     def calculate_average_pay(self):
         # TODO: return total / count, or 0.0 if empty
-        pass
+        count = self.get_employee_count()
+        if count == 0;
+            return 0.0
+        return self.calculate_total_payroll() / count
