@@ -26,7 +26,10 @@ class Employee:
         # self.name = name
         # self.employee_id = employee_id
         # ...
-        pass
+        self.name = name
+        self.employee_id = employee_id
+        self.hourly_rate = hourly_rate
+        self.hours_worked = hours_worked
 
     @property
     def name(self):
@@ -37,7 +40,10 @@ class Employee:
         # TODO: strip whitespace
         # TODO: raise ValueError if empty
         # TODO: store in self._name
-        pass
+        value = str(value).strip()
+        if not value:
+            raise ValueError("Name entry empty")
+        self._name = value
 
     @property
     def employee_id(self):
@@ -46,7 +52,10 @@ class Employee:
     @employee_id.setter
     def employee_id(self, value):
         # TODO: strip and validate non-empty
-        pass
+        value = str(value).strip()
+        if not value:
+            raise ValueError("Employee ID entry empty")
+        self._employee_id = value
 
     @property
     def hourly_rate(self):
@@ -55,7 +64,9 @@ class Employee:
     @hourly_rate.setter
     def hourly_rate(self, value):
         # TODO: raise ValueError if negative
-        pass
+        if float(value) < 0:
+            raise ValueError("Hourly rate is negative")
+        self._hourly_rate = float(value)
 
     @property
     def hours_worked(self):
@@ -64,14 +75,22 @@ class Employee:
     @hours_worked.setter
     def hours_worked(self, value):
         # TODO: raise ValueError if negative or > 168
-        pass
+        hours = float(value)
+        if hours < 0:
+            raise ValueError("Negative hours not possible")
+        elif hours > 168:
+            raise ValueError("Hours worked cannot exceed 168 hours")
+        self._hours_worked = hours
 
     def calculate_gross_pay(self):
         # TODO: regular pay = min(hours, 40) * rate
         # TODO: overtime pay = max(hours - 40, 0) * rate * 1.5
         # TODO: return total
-        pass
+        regular_pay = min(self.hours_worked, 40) * self.hourly_rate
+        overtime_pay = max(self.hours_worked, 0) * self.hourly_rate * 1.5
+        total_pay = regular_pay + overtime_pay
+        return total_pay
 
     def __str__(self):
         # TODO: return a formatted line with name, ID, rate, hours, gross pay
-        pass
+        return f"{self.name:<20} {self.employee_id:<8} ${self.hourly_rate:6.2f}  {self.hours_worked:6.1f}   ${self.calculate_gross_pay:,.2f}"
