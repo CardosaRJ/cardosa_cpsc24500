@@ -18,8 +18,33 @@ def main():
     #   2. View payroll summary
     #   3. Generate report file
     #   4. Quit
-    pass
+    print("-" * 45)
+    print( "|" + " " * 19 + "Payroll Management System" + " " * 19 + "|")
+    print("-" * 45 + "\n")
 
+    processor = PayrollProcessor()
+    processor.load_from_file("employees.txt")
+
+    report = PayrollReport(processor)
+
+    while True:
+        print("(1) View all employees")
+        print("(2) View payroll summary")
+        print("(3) Generate report file")
+        print("(4) Quit")
+        choice = input("\nSelect the option you need: ").strip()
+
+        if choice == "1":
+            report.display_all_employees()
+        elif choice == "2":
+            report.display_payroll_summary()
+        elif choice == "3":
+            report.generate_report_file("report_file.txt")
+        elif choice == "4":
+            print("Thank you, come back again!")
+            break
+        else:
+            print("That is not a valid option. Please try again.")
 
 if __name__ == "__main__":
     main()
