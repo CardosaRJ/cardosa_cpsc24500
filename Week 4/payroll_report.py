@@ -52,20 +52,20 @@ class PayrollReport:
         
         with open(filename, "w") as f:
             f.write("*" * 65 + "\n")
-            f.write("Payroll Report\n")
+            f.write(" " * 25 + "Payroll Report\n")
             f.write("*" * 65 + "\n\n")
             f.write("=" * 65 + "\n")
             f.write(f"{'Name':<20} {'ID':<8} {'Rate':>8} {'Hours':>8} {'Gross Pay':>12}\n")
             f.write("=" * 65 + "\n")
             for emp in self._processor.employees:
                 f.write(str(emp) + "\n")
-            print("\n*** Summary of Payroll ***")
-            print("-" * 26)
-            print(f"Total employees:   {count}")
-            print(f"Total payroll:     ${total:,.2f}")
-            print(f"Average pay:       ${avg:,.2f}")
+            f.write("\n*** Summary of Payroll ***\n")
+            f.write("-" * 26 + "\n")
+            f.write(f"Total employees:   {count}\n")
+            f.write(f"Total payroll:     ${total:,.2f}\n")
+            f.write(f"Average pay:       ${avg:,.2f}\n")
             if highest:
-                print(f"Highest paid:      {highest.name} (${highest.calculate_gross_pay():,.2f})")
+                f.write(f"Highest paid:      {highest.name} (${highest.calculate_gross_pay():,.2f})\n")
             if lowest:
-                print(f"Lowest paid:       {lowest.name} (${lowest.calculate_gross_pay():,.2f})")
+                f.write(f"Lowest paid:       {lowest.name} (${lowest.calculate_gross_pay():,.2f})\n")
         print(f"Your report has been saved to {filename}")

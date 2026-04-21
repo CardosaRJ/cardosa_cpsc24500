@@ -7,6 +7,9 @@ Loads employees from employees.txt, then runs a menu loop.
 from payroll_processor import PayrollProcessor
 from payroll_report import PayrollReport
 
+import os
+print("Current folder:", os.getcwd())
+print("Files found:", os.listdir('.'))
 
 def main():
     # TODO: create a PayrollProcessor
@@ -19,8 +22,8 @@ def main():
     #   3. Generate report file
     #   4. Quit
     print("-" * 45)
-    print( "|" + " " * 19 + "Payroll Management System" + " " * 19 + "|")
-    print("-" * 45 + "\n")
+    print( "|" + " " * 9 + "Payroll Management System" + " " * 9 + "|")
+    print("-" * 45)
 
     processor = PayrollProcessor()
     processor.load_from_file("employees.txt")
@@ -28,7 +31,7 @@ def main():
     report = PayrollReport(processor)
 
     while True:
-        print("(1) View all employees")
+        print("\n(1) View all employees")
         print("(2) View payroll summary")
         print("(3) Generate report file")
         print("(4) Quit")

@@ -87,10 +87,10 @@ class Employee:
         # TODO: overtime pay = max(hours - 40, 0) * rate * 1.5
         # TODO: return total
         regular_pay = min(self.hours_worked, 40) * self.hourly_rate
-        overtime_pay = max(self.hours_worked, 0) * self.hourly_rate * 1.5
+        overtime_pay = max(self.hours_worked - 40, 0) * self.hourly_rate * 1.5
         total_pay = regular_pay + overtime_pay
         return total_pay
 
     def __str__(self):
         # TODO: return a formatted line with name, ID, rate, hours, gross pay
-        return f"{self.name:<20} {self.employee_id:<8} ${self.hourly_rate:6.2f}  {self.hours_worked:6.1f}   ${self.calculate_gross_pay:,.2f}"
+        return f"{self.name:<20} {self.employee_id:<8} ${self.hourly_rate:6.2f}  {self.hours_worked:6.1f}   ${self.calculate_gross_pay():,.2f}"
