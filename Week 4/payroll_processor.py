@@ -74,6 +74,6 @@ class PayrollProcessor:
     def calculate_average_pay(self):
         # TODO: return total / count, or 0.0 if empty
         count = self.get_employee_count()
-        if count == 0;
+        if count == 0:
             return 0.0
         return self.calculate_total_payroll() / count
