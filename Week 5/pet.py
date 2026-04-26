@@ -51,4 +51,4 @@ class Pet:
 
     def __str__(self):
         # TODO: return f"{self._name} the {self._species}"
-        return f"{self._name} the {self._species}"
+        return self.status()
