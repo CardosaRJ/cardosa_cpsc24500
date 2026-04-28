@@ -24,7 +24,7 @@ def adopt_pet(pets):
     print("1. Cat")
     print("2. Dog")
     print("3. Fish")
-    choice = input("Adopt a? ").strip()
+    choice = input("Adopt a: ").strip()
     
     name = input("What will you name your new pet? ").strip()
 
@@ -93,7 +93,7 @@ def main():
                 pet.sleep()
         elif choice == "5":
             if not pets:
-                print("You haven't adobted any pets yet!")
+                print("You haven't adopted any pets yet!")
             else:
                 print("\nYour adopted pets:")
                 for pet in pets:
