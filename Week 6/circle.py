@@ -13,16 +13,18 @@ class Circle(Shape):
     def __init__(self, radius):
         # TODO: raise ValueError if radius is not positive
         # TODO: store radius
-        pass
+        if radius <= 0:
+            raise ValueError("Negative value given for radius")
+        self._radius = radius
 
     def area(self):
         # TODO: return pi * r^2 (use math.pi)
-        pass
+        return math.pi * self._radius ** 2
 
     def perimeter(self):
         # TODO: return 2 * pi * r
-        pass
+        return 2 * math.pi * self._radius
 
     def describe(self):
         # TODO: return f"Circle with radius {self._radius}"
-        pass
+        return f"Circle with radius {self._radius}"   
