@@ -12,16 +12,19 @@ class Rectangle(Shape):
     def __init__(self, width, height):
         # TODO: validate both positive (raise ValueError otherwise)
         # TODO: store width and height
-        pass
+        if width <= 0 or height <= 0:
+            raise ValueError("Need to have positive width and height")
+        self._width = width
+        self._height = height
 
     def area(self):
         # TODO: width * height
-        pass
+        return self._width * self._height
 
     def perimeter(self):
         # TODO: 2 * (width + height)
-        pass
+        return 2 * (self._width + self._height)
 
     def describe(self):
         # TODO: return f"Rectangle {self._width} x {self._height}"
-        pass
+        return f"Rectangle {self._width} x {self._height}"
