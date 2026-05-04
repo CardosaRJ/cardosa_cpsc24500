@@ -38,7 +38,7 @@ def add_rectangle(gallery):
         w = float(input("Enter width: "))
         h = float(input("Enter height: "))
         gallery.add_shape(Rectangle(w, h))
-        print("The rectangle has been added to your gallery!!")
+        print("The rectangle has been added to your gallery!")
     except ValueError as e:
         print(f"Failed to add rectangle: {e}")
 
@@ -50,7 +50,7 @@ def add_triangle(gallery):
         b = float(input("Enter side b: "))
         c = float(input("Enter side c: "))
         gallery.add_shape(Triangle(a, b, c))
-        print("The triangle has been added to your gallery!!")
+        print("The triangle has been added to your gallery!")
     except ValueError as e:
         print(f"Failed to add triangle: {e}")
 
@@ -86,7 +86,7 @@ def main():
         elif choice == "6":
             largest = gallery.largest_shape()
             if largest:
-                print(f"The largest shape in your gallery is {largest.describe()} sporting an area of {largest.area():.2f})")
+                print(f"The largest shape in your gallery is {largest.describe()}, sporting an area of {largest.area():.2f})")
             else:
                 print("Your gallery is currently empty.")
         elif choice == "7":

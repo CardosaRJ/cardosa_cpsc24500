@@ -33,6 +33,10 @@ class Gallery:
     def display_all(self):
         # TODO: print the gallery name, the count, and each shape's
         #       description, area, and perimeter
-        if not self._shapes:
-            return None
-        return max(self._shapes, key=lambda s: s.area())
+        print(f"\n*** {self._name} Gallery ***")
+        print(f"Total shapes: {len(self._shapes)}\n")
+        for i, shape in enumerate(self._shapes, 1):
+            print(f"{i}. {shape.describe()}")
+            print(f"   Area:      {shape.area():.2f}")
+            print(f"   Perimeter: {shape.perimeter():.2f}")
+            print()
