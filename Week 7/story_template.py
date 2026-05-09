@@ -22,7 +22,8 @@ class StoryTemplate:
 
     def __init__(self, name, pattern):
         # TODO: store name and pattern
-        pass
+        self._name = name
+        self._pattern = pattern
 
     @property
     def name(self):
@@ -38,7 +39,21 @@ class StoryTemplate:
         #     and pick a random Word of that POS from `words`
         #   - otherwise keep the token as-is
         # TODO: join with spaces, capitalize, add a period at the end
-        pass
+        sentence_parts = []
+        for token in self._pattern:
+            if token.startswith("{") and token.endswith("}"):
+                pos = token[1:-1]
+                matching = words.filter_by_pos(pos)
+                if len(matching) > 0:
+                    chosen = random.choice(list(matching))
+                    sentence_parts.append(str(chosen))
+                else:
+                    sentence_parts.append(f"[{pos}]")
+            else:
+                sentence_parts.append(token)
+        sentence = " ".join(sentence_parts)
+        sentence = sentence.capitalize() + "."
+        return sentence
 
 
 # TODO: define at least 3 templates here
@@ -46,4 +61,7 @@ TEMPLATES = [
     # StoryTemplate("Adventure", ["The", "{adj}", "{n}", "{v}", "{adv}", "{prep}", "the", "{adj}", "{n}"]),
     # StoryTemplate("Mystery", [...]),
     # StoryTemplate("Simple", [...]),
+    StoryTemplate("Adventure", ["The", "{adj}", "{n}", "{v}", "{adv}", "{prep}", "the", "{adj}", "{n}"]),
+    StoryTemplate("Mystery", ["A", "{adj}", "{n}", "{adv}", "{v}", "while", "the", "{n}", "{v}", "{prep}", "the", "{n}"]),
+    StoryTemplate("Simple", ["The", "{adj}", "{n}", "{v}", "{adv}"]),
 ]
