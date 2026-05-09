@@ -20,7 +20,7 @@ class WordCollection:
 
     def __init__(self):
         # TODO: empty internal list
-        pass
+        self._words = []
 
     @classmethod
     def from_file(cls, filepath):
@@ -30,38 +30,64 @@ class WordCollection:
         #   - split into text and pos; skip lines that don't parse
         #   - create a Word and add it (catch ValueError for invalid POS)
         # TODO: return the collection
-        pass
+        collection = cls()
+        try:
+            with open(filepath, "r") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    parts = line.split()
+                    if len(parts) != 2:
+                        continue
+                    try:
+                        word = Word(parts[0], parts[1])
+                        collection.add(word)
+                    except ValueError:
+                        continue
+        except FileNotFoundError:
+            print(f"Error: Cannot locate file {filepath}")
+        return collection
 
     def add(self, word):
         # TODO: raise TypeError if not a Word
         # TODO: append to internal list
-        pass
+        if not isinstance(word, Word):
+            raise TypeError("Words can only be added if they are in the Word Collection")
+        self._words.append(word)
 
     def filter_by_pos(self, part_of_speech):
         # TODO: build a new WordCollection containing only matching words
-        pass
+        filtered = WordCollection()
+        for w in self._words:
+            if w.part_of_speech == part_of_speech:
+                filtered.add(w)
+        return filtered
 
     def sorted_words(self, reverse=False):
         # TODO: build a new WordCollection from sorted(self._words, reverse=reverse)
         # No `key` parameter -- relies on Word.__lt__
-        pass
+        sorted_collection = WordCollection()
+        for w in sorted(self._words, reverse=reverse):
+            sorted_collection.add(w)
+        return sorted_collection
 
     def __len__(self):
         # TODO
-        pass
+        return len(self._words)
 
     def __getitem__(self, index):
         # TODO
-        pass
+        return self._words[index]
 
     def __contains__(self, item):
         # TODO
-        pass
+        return item in self._words
 
     def __iter__(self):
         # TODO: return iter(self._words)
-        pass
+        return iter(self._words)
 
     def __repr__(self):
         # TODO: return f"WordCollection({len(self)} words)"
-        pass
+        return f"WordCollection({len(self)} words)"
