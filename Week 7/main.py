@@ -23,7 +23,40 @@ def main():
     #   - ask how many sentences
     #   - call template.generate(words) for each
     #   - ask "Generate another story?" and break if not yes
-    pass
+    path = input("Enter the path to the word file: ").strip()
+    words = WordCollection.from_file(path)
+
+    print(f"\nLoaded {len(words)} words:")
+    for pos in ["adj", "adv", "n", "prep", "v"]:
+        count = len(words.filter_by_pos(pos))
+        print(f"{pos}: {count}")
+
+    print("\nAvailable story styles:")
+    for i, template in enumerate(TEMPLATES, 1):
+        print(f"{i}. {template.name}")
+
+    while True:
+        try:
+            choice = int(input("\nChoose your story style: "))
+            if 1 <= choice <= len(TEMPLATES):
+                template = TEMPLATES[choice - 1]
+                break
+            print("That is not a valid choice.")
+        except ValueError:
+            print("Please enter a number.")
+
+    while True:
+        num = int(input("How many sentences will your story be? "))
+        print(f"\n--- {template.name} Story ---")
+        for _ in range(num):
+            print(template.generate(words))
+        print()
+
+        again = input("Care to generate another story? (y/n): ").strip().lower()
+        if again != "y":
+            break
+
+    print("I hope you enjoyed your time with StoryTeller!")
 
 
 if __name__ == "__main__":
