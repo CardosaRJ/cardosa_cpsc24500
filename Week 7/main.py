@@ -31,21 +31,23 @@ def main():
         count = len(words.filter_by_pos(pos))
         print(f"{pos}: {count}")
 
-    print("\nAvailable story styles:")
-    for i, template in enumerate(TEMPLATES, 1):
-        print(f"{i}. {template.name}")
+    print("\nLet's tell some stories!")
 
     while True:
-        try:
-            choice = int(input("\nChoose your story style: "))
-            if 1 <= choice <= len(TEMPLATES):
-                template = TEMPLATES[choice - 1]
-                break
-            print("That is not a valid choice.")
-        except ValueError:
-            print("Please enter a number.")
+        print("\nAvailable story styles:")
+        for i, template in enumerate(TEMPLATES, 1):
+            print(f"{i}. {template.name}")
 
-    while True:
+        while True:
+            try:
+                choice = int(input("\nChoose your story style: "))
+                if 1 <= choice <= len(TEMPLATES):
+                    template = TEMPLATES[choice - 1]
+                    break
+                print("That is not a valid choice.")
+            except ValueError:
+                print("Please enter a number.")
+
         num = int(input("How many sentences will your story be? "))
         print(f"\n--- {template.name} Story ---")
         for _ in range(num):
