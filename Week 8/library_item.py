@@ -26,7 +26,10 @@ class LibraryItem(ABC):
 
     def __init__(self, title, author, year, checked_out=False):
         # TODO: store as private attributes
-        pass
+        self._title = title
+        self._author = author
+        self._year = int(year)
+        self._checked_out = checked_out
 
     @property
     def title(self):
@@ -51,18 +54,29 @@ class LibraryItem(ABC):
     def check_out(self):
         # TODO: raise RuntimeError if already checked out
         # TODO: set self._checked_out = True
-        pass
+        if self._checked_out:
+            raise RuntimeError(f"{self.title} is already checked out.")
+        self._checked_out = True
 
     def check_in(self):
         # TODO: raise RuntimeError if already available
         # TODO: set self._checked_out = False
-        pass
+        if not self._checked_out:
+            raise RuntimeError(f"{self.title} is not checked out.")
+        self._checked_out = False
 
     def __lt__(self, other):
         # TODO: compare titles case-insensitively
-        pass
+        if not isinstance(other, LibraryItem):
+            return NotImplemented
+        return self.title.lower() < other.title.lower()
 
     def __str__(self):
         # TODO: return formatted string with type, title, author, year, status
         # Status text: "CHECKED OUT" or "AVAILABLE"
-        pass
+        if self._checked_out:
+            status = "CHECKED OUT" 
+        else:
+            status = "AVAILABLE"
+            
+        return f"{self.get_item_type()} | {self.title} by {self.author} ({self.year}) - {status}"
