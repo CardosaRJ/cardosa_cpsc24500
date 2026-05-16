@@ -77,6 +77,5 @@ class LibraryItem(ABC):
         if self._checked_out:
             status = "CHECKED OUT" 
         else:
-            status = "AVAILABLE"
-            
+            status = "AVAILABLE"            
         return f"{self.get_item_type()} | {self.title} by {self.author} ({self.year}) - {status}"
