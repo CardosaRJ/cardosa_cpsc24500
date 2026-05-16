@@ -68,12 +68,17 @@ def save_catalog(catalog, filename):
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename, "w") as f:
         for item in catalog.get_all_items():
-            if isinstance(item, Book):
+            item_type = item.get_item_type()
+            
+            if item_type == "Book":
                 line = f"Book\t{item.title}\t{item.author}\t{item.year}\t{item._isbn}\t{item._page_count}\t{item.checked_out}"
-            elif isinstance(item, DVD):
+            elif item_type == "DVD":
                 line = f"DVD\t{item.title}\t{item.author}\t{item.year}\t{item._runtime_minutes}\t{item._rating}\t{item.checked_out}"
-            elif isinstance(item, Magazine):
+            elif item_type == "Magazine":
                 line = f"Magazine\t{item.title}\t{item.author}\t{item.year}\t{item._issue_number}\t{item._month}\t{item.checked_out}"
+            else:
+                continue  # skip unknown types
+                
             f.write(line + "\n")
 
 
